@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vibe Check</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            transition: background-color 0.8s ease;
+            padding: 20px;
+        }
+
+        .container {
+            text-align: center;
+            max-width: 600px;
+        }
+
+        h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+            transition: color 0.8s ease;
+        }
+
+        .vibe-text {
+            font-size: 2rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+            transition: color 0.8s ease;
+            min-height: 80px;
+        }
+
+        .emoji {
+            font-size: 8rem;
+            margin-bottom: 40px;
+            animation: bounce 2s ease infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        button {
+            padding: 20px 50px;
+            font-size: 1.5rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        .counter {
+            margin-top: 40px;
+            font-size: 1rem;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="emoji" id="emoji">✨</div>
+        <h1 id="title">Vibe Check</h1>
+        <p class="vibe-text" id="vibe">Click the button to discover your vibe</p>
+        <button id="btn" onclick="generateVibe()">Get My Vibe</button>
+        <p class="counter" id="counter">Vibes checked: 0</p>
+    </div>
+
+    <script>
+        const vibes = [
+            { emoji: "🌈", text: "You're radiating main character energy today", bg: "#FFE5EC", fg: "#C71585", btn: "#FF69B4" },
+            { emoji: "🔥", text: "You're absolutely on fire - unstoppable force detected", bg: "#FFF3E0", fg: "#E65100", btn: "#FF5722" },
+            { emoji: "🌊", text: "Calm and collected, going with the flow", bg: "#E3F2FD", fg: "#1565C0", btn: "#2196F3" },
+            { emoji: "⚡", text: "Electric energy! The universe is charging your batteries", bg: "#FFF8E1", fg: "#F57F17", btn: "#FFC107" },
+            { emoji: "🌸", text: "Soft and gentle vibes - embrace the peaceful moments", bg: "#FCE4EC", fg: "#AD1457", btn: "#E91E63" },
+            { emoji: "🚀", text: "Ready for liftoff - your ambitions are sky high", bg: "#E8EAF6", fg: "#303F9F", btn: "#3F51B5" },
+            { emoji: "🌻", text: "Bright, sunny energy - spreading warmth everywhere", bg: "#FFFDE7", fg: "#F9A825", btn: "#FFEB3B" },
+            { emoji: "🎭", text: "Mysterious and intriguing - keep them guessing", bg: "#EDE7F6", fg: "#512DA8", btn: "#673AB7" },
+            { emoji: "🍀", text: "Lucky vibes only - good fortune is heading your way", bg: "#E8F5E9", fg: "#2E7D32", btn: "#4CAF50" },
+            { emoji: "💎", text: "Rare and precious - you're one of a kind", bg: "#E0F7FA", fg: "#00838F", btn: "#00BCD4" },
+            { emoji: "🦋", text: "Transformation energy - growth looks good on you", bg: "#F3E5F5", fg: "#7B1FA2", btn: "#9C27B0" },
+            { emoji: "🌙", text: "Dreamy and ethereal - trust your intuition", bg: "#263238", fg: "#B0BEC5", btn: "#607D8B" },
+            { emoji: "☕", text: "Cozy energy - it's a perfect chill day", bg: "#EFEBE9", fg: "#5D4037", btn: "#795548" },
+            { emoji: "🎪", text: "Chaotic good - embrace the beautiful madness", bg: "#FFEBEE", fg: "#C62828", btn: "#F44336" },
+            { emoji: "🧊", text: "Cool and collected - nothing can phase you", bg: "#E1F5FE", fg: "#0277BD", btn: "#03A9F4" },
+        ];
+
+        let count = 0;
+
+        function generateVibe() {
+            const vibe = vibes[Math.floor(Math.random() * vibes.length)];
+            
+            document.getElementById('emoji').textContent = vibe.emoji;
+            document.getElementById('vibe').textContent = vibe.text;
+            document.body.style.backgroundColor = vibe.bg;
+            document.getElementById('title').style.color = vibe.fg;
+            document.getElementById('vibe').style.color = vibe.fg;
+            
+            const btn = document.getElementById('btn');
+            btn.style.backgroundColor = vibe.btn;
+            btn.style.color = vibe.bg;
+
+            count++;
+            document.getElementById('counter').textContent = `Vibes checked: ${count}`;
+            document.getElementById('counter').style.color = vibe.fg;
+            
+            // Reset animation
+            const emoji = document.getElementById('emoji');
+            emoji.style.animation = 'none';
+            emoji.offsetHeight; // Trigger reflow
+            emoji.style.animation = 'bounce 2s ease infinite';
+        }
+
+        // Initial style
+        document.body.style.backgroundColor = '#f0f4f8';
+    </script>
+</body>
+</html>
