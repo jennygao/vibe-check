@@ -1,0 +1,22 @@
+name: Deploy to Quick
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Deploy to Quick
+        uses: Shopify/skai-train/.github/actions/deploy-to-quick@main
+        with:
+          site-name: vibe-check
+          source-dir: .
